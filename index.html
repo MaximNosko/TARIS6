@@ -1,0 +1,86 @@
+<title>Calculator</title>
+<meta charset="utf-8" />
+<input type="number" name="ekran" disabled value="0" id="ekran" />
+<br />
+<button onclick="add_number('7')">7</button>
+<button onclick="add_number('8')">8</button>
+<button onclick="add_number('9')">9</button>
+<br />
+<button onclick="add_number('4')">4</button>
+<button onclick="add_number('5')">5</button>
+<button onclick="add_number('6')">6</button>
+<br />
+<button onclick="add_number('1')">1</button>
+<button onclick="add_number('2')">2</button>
+<button onclick="add_number('3')">3</button>
+<br />
+<button onclick="add_number('0')">0</button>
+<button onclick="nazad()">Назад</button>
+<button onclick="ravno()">=</button>
+<br />
+<button id="knopka_plus">+</button>
+<button id="knopka_minus">-</button>
+<button id="knopka_umn">*</button>
+<button id="knopka_del">/</button>
+<button id="knopka_clear">C</button>
+<br />
+
+<script>
+    let znak=null;
+    let pred_z=0;
+    let ravno=function()
+    {
+        document.getElementById("ekran").value=Math.round(znak(pred_z,document.getElementById("ekran").value*1))
+    }
+    let add_number=function(n)
+    {
+        if(document.getElementById('ekran').value==="0")
+        {
+            document.getElementById('ekran').value=n;
+        }
+        else
+        {
+            document.getElementById('ekran').value+=n;
+        }
+    }
+    let nazad=function()
+    {
+        if(document.getElementById('ekran').value==="0")
+        {
+            return;
+        }
+        if(document.getElementById('ekran').value.length===1)
+        {
+            document.getElementById('ekran').value="0";
+            return;
+        }
+        document.getElementById('ekran').value=document.getElementById('ekran').value.substring(0, document.getElementById('ekran').value.length - 1);
+    }
+    document.getElementById("knopka_clear").onclick=function()
+    {
+        document.getElementById("ekran").value=0;
+    }
+    let new_znak=function(f)
+    {
+        znak=f;
+        pred_z=document.getElementById("ekran").value*1;
+        document.getElementById("ekran").value="0";
+    }
+    document.getElementById("knopka_plus").onclick=function()
+    {
+        new_znak((a,b)=>a+b);
+    }
+    document.getElementById("knopka_minus").onclick=function()
+    {
+        new_znak((a,b)=>{return a-b});
+    }
+    document.getElementById("knopka_umn").onclick=function()
+    {
+        new_znak((a,b)=>a*b);
+    }
+    document.getElementById("knopka_del").onclick=function()
+    {
+        new_znak((a,b)=>{if(b===0){return b} return a/b});
+    }
+</script>
+<a href="https://www.youtube.com/watch?v=HMjLkClz2UA">Видео</a>
